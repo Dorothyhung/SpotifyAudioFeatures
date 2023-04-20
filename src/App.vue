@@ -1,6 +1,12 @@
 <template>
   <h1>{{ title }}</h1>
-  <Modal />
+  <div>
+    <Modal v-if="showModal" @close="toggleModal"/>
+  </div>
+  <button @click="toggleModal">Show Modal</button>
+  <input id="input" type="text" placeholder="Enter a track">
+  <button id="search" @click="clickEvent">Search</button>
+  <p>{{ text }}</p>
 </template>
 
 <script>
@@ -11,10 +17,21 @@ export default {
   components: { Modal },
   data() {
     return {
-      title: 'Spotify Audio Features'
+      title: 'Spotify Audio Features',
+      text: 'Hi',
+      showModal: false
+    }
+  },
+  methods: {
+    clickEvent() {
+      this.text=''
+    },
+    toggleModal() {
+      this.showModal = !this.showModal
     }
   }
 }
+
 </script>
 
 <style>

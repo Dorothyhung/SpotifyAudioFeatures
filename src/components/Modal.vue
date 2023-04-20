@@ -1,11 +1,22 @@
 <template>
-    <div class="backdrop">
+    <div class="backdrop" @click.self="closeModal">
         <div class="modal">
             <h1>Modal Title</h1>
             <p >modal content</p>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        closeModal() {
+            this.$emit('close')
+        }
+    }
+}
+</script>
+
 
 <style scoped>
     .modal {
