@@ -17,29 +17,33 @@ const APIController = (function() {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
                 },
-                body: 'grant_type=client_credentials'
+                body: 'grant_type=client_credentials',
             }
         );
 
-        const data = await result.json();
-        const token =  data.access_token;
-        console.log(token);
+        let data = await result.json();
+        console.log(data)
+        let token =  data.access_token;
+        console.log("token= "+ token);
         return token;
     }
 
-    let token = _getToken()
+    const token = _getToken()
 
-    const _searchArtists = async (token, artist_name) => {
-        const result = await fetch('https://api.spotify.com/v1/search?q=${artist_name}&type=artist&limit=1', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                },
-                mode:'no-cors'
+    async function getArtistID(artist_name) {
+        console.log("searching for " + artist_name)
+        var token = await _getToken();
+        var artistData = await fetch("https://api.spotify.com/v1/search?q=" + artist_name + "&type=artist", {
+            method: 'GET',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer ' + token
             }
-        );
-        const data = await result.json().artists;
-        return data
+        });
+        var jsonResult = await artistData.json();
+        var artistID = jsonResult.artists.items[0].id;
+        console.log(artistID)
+        return artistID
     }
-    console.log(_searchArtists(token, 'Ed Sheeran'))
+    console.log("results for Ed Sheeran ="+ getArtistID('Ed Sheeran'));
 })();
