@@ -5,7 +5,7 @@ import './assets/global.css'
 createApp(App).mount('#app')
 
 
-const APIController = (function() {
+/* const APIController = (function() {
     const clientId = '54df636a716a4694a62016ca346e68a5';
     const clientSecret = '0bd1cdbec71e4bdcbddd79e0e15b3e6b';
 
@@ -63,4 +63,4 @@ const APIController = (function() {
     }
     console.log("results for track ="+ getTrackID('Hello'));
    
-})();
+})(); */
