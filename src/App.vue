@@ -7,6 +7,7 @@
   <input id="input" type="text" placeholder="Enter a track">
   <button id="search" @click="getSpotifyData">Search</button>
   <p>{{ text }}</p>
+  <p id="reults"></p>
 </template>
 
 <script>
@@ -18,7 +19,7 @@ export default {
   data() {
     return {
       title: 'Spotify Audio Features',
-      text: 'Hi',
+      text: 'Results',
       showModal: false,
       showTracks: []
     }
@@ -70,13 +71,13 @@ export default {
           }
 
           //this.showTracks = trackList
-          console.log(trackList)
+          //console.log(trackList)
           return trackList;
       }
-      //getTrackID(trackName).then(result => console.log(result))
+      getTrackID(trackName).then(result => console.log(result))
+      //document.getElementById("results") = result
       getTrackID(trackName).then(result => this.showTracks.push(result))
       console.log("tracks = "+ getTrackID(trackName));
-      console.log(typeof trackList)
 
     }
   }
